@@ -47,6 +47,6 @@ $ironMan_2 = new IronMan(new Cannone, new Scudo, new Aggancio);
 $ironMan_3 = new IronMan(new LaserGun, new IntercettaAttacchi, new RazzoPropulsore);
 $ironMan_4 = new IronMan(new Sarcasmo, new Scudo, new RazzoPropulsore);
 
-echo "Sono stati creati " . IronMan::$IronMenCounter ." Iron Men";
+echo "Sono stati creati " . IronMan::$IronMenCounter ." Iron Men \n";
 
 $ironMan_4->attack();
