@@ -1,79 +1,52 @@
-<!-- Creazione Esercito Random di Iron Men -->
-
 <?php
+ 
+require './aggancioParete.php';
+require './extraBoost.php';
+require './interceptor.php';
+require './laserGun.php';
+require './lightcannon.php';
+require './razzoPropulsore.php';
+require './sarcasm.php';
+require './scudo.php';
 
-require "./armWeapons.php";
-require "./bootWeapons.php";
-require "./shieldWeapons.php";
-require "./IronMan.php";
-require "./Ammo_Armour.php";
+class IronMan {
 
-//* funzione di appoggio per estrarre un elemento casuale da un array
-function pickRandom($arr){
-    return $arr[array_rand($arr)];
+    public $attack;
+    public $defense;
+    public $boot;
+    public static $IronMenCounter = 0;
+
+    public function __construct(ArmWeapon $attacco, ShieldWeapon $difesa, BootUtility $stivali)
+    {
+        $this->attack = $attacco;
+        $this->defense = $difesa;
+        $this->boot = $stivali;
+        self::$IronMenCounter++;
+    }
+
+    public function attack(){
+        $this->attack->attack();
+    }
+
+    public function defense(){
+        $this->defense->defense();
+    }
+
+    public function utility(){
+        $this->boot->active();
+    }
+
 }
 
-$ironMen_army = [];
+$ironMan_1 = new IronMan(new LaserGun, new Scudo, new RazzoPropulsore);
+$ironMan_1->attack();
+$ironMan_1->defense();
+$ironMan_1->utility();
 
-$ironMen_number = rand(3, 15);
+$ironMan_2 = new IronMan(new Cannone, new Scudo, new Aggancio);
+$ironMan_3 = new IronMan(new LaserGun, new IntercettaAttacchi, new RazzoPropulsore);
+$ironMan_4 = new IronMan(new Sarcasmo, new Scudo, new RazzoPropulsore);
 
-for($i=0; $i<$ironMen_number; $i++){
-    
-    //Scelta munizioni e armatura casuali
-    $randomAmmo_1 = pickRandom($ammoType);
-    $randomAmmo_2 = pickRandom($ammoType);
-    $randomArmour = pickRandom($armourType);
-    
-    //Armi da Braccio sinistro
-    $leftArmWeapons = [
-        new Cannone($randomAmmo_1),
-        new Catapulta($randomAmmo_1),
-        new Mitra($randomAmmo_1),
-        new Generatore($randomAmmo_1)
-    ];
-    
-    //Armi da Braccio sinistro
-    $rightArmWeapons = [
-        new Cannone($randomAmmo_2),
-        new Catapulta($randomAmmo_2),
-        new Mitra($randomAmmo_2),
-        new Generatore($randomAmmo_2)
-    ];
-    
-    //Armi da Braccio sinistro
-    $shieldWeapons = [
-        new Scudo($randomArmour),
-        new IntercettaAttacchi($randomArmour),
-        new ExtraBoost($randomArmour)
-    ];
+echo "Sono stati creati " . IronMan::$IronMenCounter ." Iron Men";
 
-    //Gamba sinistra
-    $leftBoots = [
-        new Razzo(),
-        new Aggancio()
-    ];
-
-    //Gamba destra
-    $rightBoots = [
-        new Razzo(),
-        new Aggancio()
-    ];
-
-    $ironMen_army [] = new IronMan(
-        pickRandom($leftArmWeapons), pickRandom($rightArmWeapons), pickRandom($shieldWeapons), pickRandom($rightBoots), pickRandom($leftBoots)
-    );
-}
-
-echo "Creati " . IronMan::$counterIronMen . " IronMan. \n";
-foreach($ironMen_army as $index => $ironMan){
-
-    echo "Iron Man numero " . ($index + 1) . " \n";
-    $ironMan->upperAttack();
-
-    echo "Scudo: "; 
-    $ironMan->shieldActive();
-    echo "\n";
-
-    $ironMan->bootsActive();
-    
-}
+$ironMan_4->attack();
