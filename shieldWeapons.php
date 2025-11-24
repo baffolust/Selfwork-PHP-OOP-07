@@ -1,8 +1,8 @@
 <!-- Classi dei potenziamenti da busto -->
 <?php
 
-abstract class shieldWeapon{
-    public $armourType;
+abstract class ShieldWeapon{
+    protected $armourType;
     
     public function __construct($_armour){
         $this->armourType = $_armour;
@@ -11,19 +11,19 @@ abstract class shieldWeapon{
     public abstract function active();
 }
 
-class Scudo extends shieldWeapon{
+class Scudo extends ShieldWeapon{
     public function active(){
         echo "Scudo in $this->armourType \n";
     }
 }
 
-class IntercettaAttacchi extends shieldWeapon{
+class IntercettaAttacchi extends ShieldWeapon{
     public function active(){
         echo "Intercetta gli attacchi nemici \n";
     }
 }
 
-class ExtraBoost extends shieldWeapon{
+class ExtraBoost extends ShieldWeapon{
     public function active(){
         echo "Extra spinta per volo \n";
     }

@@ -1,8 +1,8 @@
 <!-- Classi delle armi da braccio -->
 <?php
 
-abstract class armWeapon{
-    public $ammo;
+abstract class ArmWeapon{
+    protected $ammo;
     
     public function __construct($_ammo){
         $this->ammo = $_ammo;
@@ -11,25 +11,25 @@ abstract class armWeapon{
     public abstract function attack();
 }
 
-class Cannone extends armWeapon{
+class Cannone extends ArmWeapon{
     public function attack(){
-        echo "Spara $this->ammo a potenza indautia \n";
+        echo "Spara $this->ammo a potenza inaudita \n";
     }
 }
 
-class Catapulta extends armWeapon{
+class Catapulta extends ArmWeapon{
     public function attack(){
         echo "Lancia $this->ammo a distanza siderale \n";
     }
 }
 
-class Mitra extends armWeapon{
+class Mitra extends ArmWeapon{
     public function attack(){
         echo "Raffica di $this->ammo \n";
     }
 }
 
-class Generatore extends armWeapon{
+class Generatore extends ArmWeapon{
     public function attack(){
         echo "Genera migliaia di $this->ammo \n";
     }
